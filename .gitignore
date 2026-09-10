@@ -1,0 +1,12 @@
+# CLion and IDE files
+.idea/
+cmake-build-debug/
+
+# Compiled object files and executables
+*.o
+*.exe
+*.out
+
+# System files
+.DS_Store
+
