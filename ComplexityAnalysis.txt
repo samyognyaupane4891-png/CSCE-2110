@@ -1,0 +1,7 @@
+Complexity Analysis- Milestone 1
+
+In Milestone 1, active reservations are stored in a linked list. Inserting a new reservation is O(1) because it is added directly to the head of the list. However, searching for or deleting a reservation is O(N) because the list may need to be checked node by node.
+
+Cancellation history uses a stack. Both pushing a cancelled reservation and popping one to undo a cancellation are O(1) because these operations only affect the top of the stack.
+
+-The waiting list uses a queue. Enqueueing a student is O(1) using the rear pointer, while dequeueing is also O(1) using the front pointer. This allows students to be added and removed efficiently.
