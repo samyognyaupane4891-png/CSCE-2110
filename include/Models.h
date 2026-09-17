@@ -19,6 +19,8 @@ struct Reservation {
     std::string resourceId;
     std::string date;
 };
+std::string startTime;
+std::string endTime;
 
 struct StudentRequest {
     int studentId;
