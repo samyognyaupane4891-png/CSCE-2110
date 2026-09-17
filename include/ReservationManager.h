@@ -1,7 +1,6 @@
 /**
  * File: ReservationManager.h
- * Author: Aayush Shrestha
- * Date: 2024-06-10
+ * Author: Teammate 3 / Samyog Nyaupane
  * Description: System logic for Campus Resource Reservation System
  */
 
@@ -35,7 +34,7 @@ public:
         while (std::getline(file, line)) {
             std::stringstream ss(line);
             std::string id, name, type, status;
-           
+            
             std::getline(ss, id, '|');
             std::getline(ss, name, '|');
             std::getline(ss, type, '|');
@@ -56,7 +55,7 @@ public:
 
     void createReservation(int resId, int studentId, const std::string& studentName, const std::string& resourceId, const std::string& date, const std::string& startTime, const std::string& endTime) {
         Reservation newRes = {resId, studentId, studentName, resourceId, date, startTime, endTime};
-       
+        
         // Pushes the new reservation to the Linked List
         activeReservations.insertReservation(newRes);
         std::cout << "Reservation " << resId << " created successfully for " << studentName << ".\n";
