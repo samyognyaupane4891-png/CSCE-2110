@@ -1,11 +1,12 @@
 /**
  * File: ReservationManager.h
- * Author: Teammate 3
+ * Author: Aayush Shrestha
+ * Date: 2024-06-10
  * Description: System logic for Campus Resource Reservation System
  */
 
-#ifndef RESERVATION_MANAGER_H
-#define RESERVATION_MANAGER_H
+#ifndef CAMPUSRESERVATIONSYSTEM_RESERVATIONMANAGER_H
+#define CAMPUSRESERVATIONSYSTEM_RESERVATIONMANAGER_H
 
 #include "Models.h"
 #include "DataStructures.h"
@@ -34,7 +35,7 @@ public:
         while (std::getline(file, line)) {
             std::stringstream ss(line);
             std::string id, name, type, status;
-            
+           
             std::getline(ss, id, '|');
             std::getline(ss, name, '|');
             std::getline(ss, type, '|');
@@ -53,9 +54,9 @@ public:
         }
     }
 
-    void createReservation(int resId, int studentId, const std::string& studentName, const std::string& resourceId, const std::string& date) {
-        Reservation newRes = {resId, studentId, studentName, resourceId, date};
-        
+    void createReservation(int resId, int studentId, const std::string& studentName, const std::string& resourceId, const std::string& date, const std::string& startTime, const std::string& endTime) {
+        Reservation newRes = {resId, studentId, studentName, resourceId, date, startTime, endTime};
+       
         // Pushes the new reservation to the Linked List
         activeReservations.insertReservation(newRes);
         std::cout << "Reservation " << resId << " created successfully for " << studentName << ".\n";
@@ -85,18 +86,18 @@ public:
 
     void showActiveReservations() {
         std::cout << "\n--- Active Reservations ---\n";
-        std::cout << "Active reservations feature ready.\n";
+        activeReservations.displayReservations();
     }
 
     void showWaitList() {
         std::cout << "\n--- Waiting List ---\n";
-        std::cout << "Waitlist feature ready.\n";
+        waitList.displayWaitingList();
     }
 
     void showCancelHistory() {
         std::cout << "\n--- Cancellation History ---\n";
-        std::cout << "Cancellation history feature ready.\n";
+        cancelHistory.displayHistory();
     }
 };
 
-#endif
+#endif // CAMPUSRESERVATIONSYSTEM_RESERVATIONMANAGER_H
