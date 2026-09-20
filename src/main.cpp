@@ -1,3 +1,6 @@
+// Completed by Aayush Shrestha
+// Proof read by Samyog Nyaupane
+
 #include "../include/ReservationManager.h"
 #include <iostream>
 #include <string>
@@ -34,7 +37,7 @@ int main() {
             manager.displayResources();
         } else if (choice == 2) {
             int resId, studentId;
-            std::string studentName, resourceId, date;
+            std::string studentName, resourceId, date, startTime, endTime;
 
             std::cout << "Reservation ID: "; std::cin >> resId;
             std::cout << "Student ID: "; std::cin >> studentId;

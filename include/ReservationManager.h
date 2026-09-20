@@ -1,8 +1,5 @@
-/**
- * File: ReservationManager.h
- * Author: Teammate 3 / Samyog Nyaupane
- * Description: System logic for Campus Resource Reservation System
- */
+// Completed by Aayush Shrestha
+// Proof read by Samyog Nyaupane (Leader)
 
 #ifndef CAMPUSRESERVATIONSYSTEM_RESERVATIONMANAGER_H
 #define CAMPUSRESERVATIONSYSTEM_RESERVATIONMANAGER_H
