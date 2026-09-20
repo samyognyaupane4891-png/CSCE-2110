@@ -2,6 +2,8 @@
 #include <iostream>
 #include <string>
 
+#include "Models.h"
+
 int main() {
     ReservationManager manager;
 
@@ -40,8 +42,12 @@ int main() {
             std::cout << "Student Name: "; std::getline(std::cin, studentName);
             std::cout << "Resource ID: "; std::cin >> resourceId;
             std::cout << "Date (MM/DD/YYYY): "; std::cin >> date;
+            std::cout<< "Start Time: "; std::cin >> startTime;
+            std::cout<< "End Time: "; std::cin >> endTime;
 
-            manager.createReservation(resId, studentId, studentName, resourceId, date);
+
+
+            manager.createReservation(resId, studentId, studentName, resourceId, date, startTime, endTime);
         } else if (choice == 3) {
             int resId;
             std::cout << "Reservation ID to cancel: "; std::cin >> resId;
