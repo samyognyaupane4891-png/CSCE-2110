@@ -10,7 +10,7 @@
 #include <fstream>
 #include <sstream>
 #include <vector>
-feature/project-skeleton
+
 
 class ReservationManager {
 public:
@@ -85,5 +85,76 @@ public:
             std::cout << res.id << " | " << res.name << " | " << res.type << " | " << res.status << "\n";
         }
     }
+    // Helper function for Merge Sort
+    void merge(std::vector<Resource>& arr, int left, int mid, int right) {
+        int n1 = mid - left + 1;
+        int n2 = right - mid;
+        std::vector<Resource> L(n1), R(n2);
+
+        for (int i = 0; i < n1; i++) L[i] = arr[left + i];
+        for (int j = 0; j < n2; j++) R[j] = arr[mid + 1 + j];
+
+        int i = 0, j = 0, k = left;
+        while (i < n1 && j < n2) {
+            // Using your struct's 'id' variable
+            if (L[i].id <= R[j].id) {
+                arr[k] = L[i];
+                i++;
+            } else {
+                arr[k] = R[j];
+                j++;
+            }
+            k++;
+        }
+        while (i < n1) { arr[k] = L[i]; i++; k++; }
+        while (j < n2) { arr[k] = R[j]; j++; k++; }
+    }
+
+    // Main Merge Sort function
+    void mergeSortResources(std::vector<Resource>& arr, int left, int right) {
+        if (left < right) {
+            int mid = left + (right - left) / 2;
+            mergeSortResources(arr, left, mid);
+            mergeSortResources(arr, mid + 1, right);
+            merge(arr, left, mid, right);
+        }
+    }
+
+    // The function you will call from your main.cpp menu
+    void sortResources() {
+        if (!resources.empty()) {
+            mergeSortResources(resources, 0, resources.size() - 1);
+            std::cout << "Resources successfully sorted by ID.\n";
+        }
+    }
+
+    // Binary Search for Resource by ID (Requires list to be sorted first!)
+    void searchResource(std::string targetId) {
+        int left = 0;
+        int right = resources.size() - 1;
+        bool found = false;
+
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+
+            if (resources[mid].id == targetId) {
+                std::cout << "\nResource Found: " << resources[mid].name
+                          << " | Status: " << resources[mid].status << "\n";
+                found = true;
+                break;
+            }
+            if (resources[mid].id < targetId) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+
+        if (!found) {
+            std::cout << "\nResource " << targetId << " not found.\n";
+        }
+    }
+
+
 };
 #endif //CAMPUSRESERVATIONSYSTEM_RESERVATIONMANAGER_H
