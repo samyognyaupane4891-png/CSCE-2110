@@ -1,3 +1,5 @@
+// Completed by Samyog Nyaupane
+
 #ifndef MODELS_H
 #define MODELS_H
 
@@ -18,9 +20,9 @@ struct Reservation {
     std::string studentName;
     std::string resourceId;
     std::string date;
+    std::string startTime;
+    std::string endTime;
 };
-std::string startTime;
-std::string endTime;
 
 struct StudentRequest {
     int studentId;
