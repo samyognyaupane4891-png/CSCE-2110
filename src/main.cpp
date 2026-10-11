@@ -5,8 +5,6 @@
 #include <iostream>
 #include <string>
 
-#include "Models.h"
-
 int main() {
     ReservationManager manager;
 
@@ -23,7 +21,10 @@ int main() {
         std::cout << "5. Undo Cancellation\n";
         std::cout << "6. View Active Reservations\n";
         std::cout << "7. View Cancellation History\n";
-        std::cout << "8. Exit\n";
+        std::cout << "8. Sort Resources (Merge Sort)\n";
+        std::cout << "9. Search Resource (Binary Search)\n";
+        std::cout << "10. Generate System Report\n";
+        std::cout << "11. Exit\n";
         std::cout << "Enter Choice: ";
 
         // Input validation to prevent infinite loops on bad input
@@ -45,10 +46,8 @@ int main() {
             std::cout << "Student Name: "; std::getline(std::cin, studentName);
             std::cout << "Resource ID: "; std::cin >> resourceId;
             std::cout << "Date (MM/DD/YYYY): "; std::cin >> date;
-            std::cout<< "Start Time: "; std::cin >> startTime;
-            std::cout<< "End Time: "; std::cin >> endTime;
-
-
+            std::cout << "Start Time: "; std::cin >> startTime;
+            std::cout << "End Time: "; std::cin >> endTime;
 
             manager.createReservation(resId, studentId, studentName, resourceId, date, startTime, endTime);
         } else if (choice == 3) {
@@ -64,11 +63,20 @@ int main() {
         } else if (choice == 7) {
             manager.showCancelHistory();
         } else if (choice == 8) {
+            manager.sortResources();
+        } else if (choice == 9) {
+            std::string targetId;
+            std::cout << "Enter Resource ID to search: ";
+            std::cin >> targetId;
+            manager.searchResource(targetId);
+        } else if (choice == 10) {
+            manager.generateSystemReport();
+        } else if (choice == 11) {
             std::cout << "Exiting system...\n";
         } else {
             std::cout << "Invalid choice. Please try again.\n";
         }
-    } while (choice != 8);
+    } while (choice != 11);
 
     return 0;
 }
