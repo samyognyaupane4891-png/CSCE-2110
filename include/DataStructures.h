@@ -1,3 +1,6 @@
+// Completed by Siddhanta Tripathi
+// Proofread by Samyog Nyaupane (Team leader)
+
 #ifndef DATA_STRUCTURES_H
 #define DATA_STRUCTURES_H
 
