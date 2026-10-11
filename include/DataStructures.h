@@ -15,7 +15,29 @@ private:
     ReservationNode* head;
 public:
     ReservationList() : head(nullptr) {}
-    
+    // Destructor to fix the memory leak from milestone 1!
+    ~ReservationList() {
+        ReservationNode* current = head;
+        while (current != nullptr) {
+            ReservationNode* nextNode = current->next;
+            delete current;
+            current = nextNode;
+        }
+        head = nullptr;
+    }
+
+    // Helper for the report to count active bookings per resource
+    int countActiveForResource(const std::string& targetResourceId) const {
+        int count = 0;
+        ReservationNode* current = head;
+        while (current != nullptr) {
+            if (current->data.resourceId == targetResourceId) {
+                count++;
+            }
+            current = current->next;
+        }
+        return count;
+    }
     void insertReservation(Reservation r) {
         ReservationNode* newNode = new ReservationNode(r);
         newNode->next = head; // Insert at head for O(1) performance
@@ -63,6 +85,17 @@ private:
     StackNode* top;
 public:
     CancellationStack() : top(nullptr) {}
+    // Adding destructor here too
+    ~CancellationStack() {
+        StackNode* current = top;
+        while (current != nullptr) {
+            StackNode* nextNode = current->next;
+            delete current;
+            current = nextNode;
+        }
+        top = nullptr;
+    }
+
 
     void push(Reservation r) {
         StackNode* newNode = new StackNode(r);
@@ -101,7 +134,30 @@ private:
     QueueNode* rear;
 public:
     WaitingQueue() : front(nullptr), rear(nullptr) {}
+    // Destructor for the queue memory
+    ~WaitingQueue() {
+        QueueNode* current = front;
+        while (current != nullptr) {
+            QueueNode* nextNode = current->next;
+            delete current;
+            current = nextNode;
+        }
+        front = rear = nullptr;
+    }
 
+    // Helper for the final report to check waitlist count per resource
+    int countWaitingForResource(const std::string& targetResourceId) const {
+        int count = 0;
+        QueueNode* current = front;
+        while (current != nullptr) {
+            // Accessing resourceId inside the StudentRequest struct
+            if (current->data.resourceId == targetResourceId) {
+                count++;
+            }
+            current = current->next;
+        }
+        return count;
+    }
     void enqueue(StudentRequest s) {
         QueueNode* newNode = new QueueNode(s);
         if (rear == nullptr) {
