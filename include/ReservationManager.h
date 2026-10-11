@@ -208,20 +208,24 @@ public:
         }
     }
 
-    // --- REPORTING MODULE ---
+    
+// Final project requirement: Generate system reports
     void generateSystemReport() {
         std::cout << "\n===== CAMPUS RESOURCE SYSTEM REPORT =====\n";
         
         int totalResources = resources.size();
         int bookedResources = 0;
         
+        // 1. Resource Utilization 
         std::cout << "--- Resource Utilization ---\n";
         for (const auto& res : resources) {
+            int activeCount = activeReservations.countActiveForResource(res.id);
+            
+            std::cout << res.id << " (" << res.name << "): " 
+                      << activeCount << " Active Booking(s)\n";
+                      
             if (res.status == "Booked" || res.status == "Unavailable") {
                 bookedResources++;
-                std::cout << res.id << " (" << res.name << "): 1 Active Booking\n";
-            } else {
-                std::cout << res.id << " (" << res.name << "): 0 Active Bookings\n";
             }
         }
         
@@ -230,6 +234,7 @@ public:
             std::cout << "\nTotal System Utilization: " << utilization << "%\n";
         }
 
+        // 2. Waiting-List Statistics 
         std::cout << "\n--- Waiting-List Statistics ---\n";
         bool anyoneWaiting = false;
         
@@ -247,6 +252,6 @@ public:
         
         std::cout << "=========================================\n";
     }
-};
+    };
 
 #endif // CAMPUSRESERVATIONSYSTEM_RESERVATIONMANAGER_H
