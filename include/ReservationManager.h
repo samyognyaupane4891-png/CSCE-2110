@@ -46,11 +46,14 @@ public:
     void displayResources() {
         std::cout << "\n--- Campus Resources ---\n";
         for (const auto& res : resources) {
-            std::cout << res.id << " | " << res.name << " | " << res.type << " | " << res.status << "\n";
+            std::cout << res.id << " | " << res.name << " | " << res.type << " | " <<
+                res.status << "\n";
         }
     }
 
-    void createReservation(int resId, int studentId, const std::string& studentName, const std::string& resourceId, const std::string& date, const std::string& startTime, const std::string& endTime) {
+    void createReservation(int resId, int studentId, const std::string& studentName,
+        const std::string& resourceId, const std::string& date,
+        const std::string& startTime, const std::string& endTime) {
         // 1. Check if the resource actually exists
         bool resourceExists = false;
         Resource* targetRes = nullptr;
@@ -73,19 +76,22 @@ public:
             char choice;
             std::cin >> choice;
             if (choice == 'Y' || choice == 'y') {
-                Reservation waitRes = {resId, studentId, studentName, resourceId, date, startTime, endTime};
-                waitList.enqueue(waitRes); // Pass the reservation object instead of separate parts
+                // Create a StudentRequest instead of a full Reservation
+                StudentRequest waitReq = {studentId, studentName, resourceId};
+                waitList.enqueue(waitReq);
                 std::cout << "Successfully added to the waiting list.\n";
             }
             return;
         }
 
         // 3. If safe, create the reservation and mark the resource as Booked
-        Reservation newRes = {resId, studentId, studentName, resourceId, date, startTime, endTime};
+        Reservation newRes = {resId, studentId, studentName,
+            resourceId, date, startTime, endTime};
         activeReservations.insertReservation(newRes);
         targetRes->status = "Booked"; 
         
-        std::cout << "Reservation " << resId << " created successfully for " << studentName << ".\n";
+        std::cout << "Reservation " << resId << " created successfully for " <<
+            studentName << ".\n";
     }
 
     void cancelReservation(int resId) {
@@ -115,7 +121,8 @@ public:
             }
 
             if (!canRestore) {
-                std::cout << "Error: Cannot undo. Resource " << lastCancelled.resourceId << " was booked by someone else.\n";
+                std::cout << "Error: Cannot undo. Resource " << lastCancelled.resourceId
+                << " was booked by someone else.\n";
                 cancelHistory.push(lastCancelled); 
             } else {
                 activeReservations.insertReservation(lastCancelled);
@@ -241,7 +248,8 @@ public:
         for (const auto& res : resources) {
             int waitCount = waitList.countWaitingForResource(res.id); 
             if (waitCount > 0) {
-                std::cout << res.id << " (" << res.name << "): " << waitCount << " student(s) waiting.\n";
+                std::cout << res.id << " (" << res.name << "): " << waitCount <<
+                    " student(s) waiting.\n";
                 anyoneWaiting = true;
             }
         }

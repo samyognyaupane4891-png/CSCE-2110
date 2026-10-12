@@ -6,14 +6,14 @@
 #include <string>
 #include <iostream>
 
-
+// holds the basic info
 struct Resource {
     std::string id;
     std::string name;
     std::string type;
     std::string status; // "Available" or "Unavailable"
 };
-
+// track the details for active booking
 struct Reservation {
     int reservationId;
     int studentId;
@@ -23,7 +23,7 @@ struct Reservation {
     std::string startTime;
     std::string endTime;
 };
-
+// using it to push student into waitlist queue
 struct StudentRequest {
     int studentId;
     std::string studentName;
